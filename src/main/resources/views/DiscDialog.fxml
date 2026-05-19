@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="prog.controllers.DiscDialogController"
+      spacing="0" styleClass="dialog-root"
+      prefWidth="640" prefHeight="480">
+
+    <Label text="Формування диска" styleClass="dialog-header"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="dialog-form">
+        <padding><Insets top="14" right="20" bottom="10" left="20"/></padding>
+        <Label text="Назва диска *:" styleClass="form-label" minWidth="110"/>
+        <TextField fx:id="discTitleField" promptText="Введіть назву збірки"
+                   HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+    </HBox>
+
+    <Separator/>
+
+    <HBox spacing="0" VBox.vgrow="ALWAYS">
+        <padding><Insets top="10" right="20" bottom="10" left="20"/></padding>
+
+        <VBox spacing="6" HBox.hgrow="ALWAYS">
+            <Label text="Доступні треки:" styleClass="panel-title"/>
+            <ListView fx:id="availableListView" VBox.vgrow="ALWAYS" styleClass="track-list"/>
+        </VBox>
+
+        <VBox spacing="8" alignment="CENTER" minWidth="64">
+            <padding><Insets left="10" right="10"/></padding>
+            <Button text="▶▶" onAction="#onAddToDisc"      styleClass="btn-move" prefWidth="48"/>
+            <Button text="◀◀" onAction="#onRemoveFromDisc" styleClass="btn-move" prefWidth="48"/>
+        </VBox>
+
+        <VBox spacing="6" HBox.hgrow="ALWAYS">
+            <HBox spacing="6" alignment="CENTER_LEFT">
+                <Label text="Треки диска:" styleClass="panel-title" HBox.hgrow="ALWAYS"/>
+                <Button text="▲" onAction="#onMoveUp"   styleClass="btn-order" prefWidth="30"/>
+                <Button text="▼" onAction="#onMoveDown" styleClass="btn-order" prefWidth="30"/>
+            </HBox>
+            <ListView fx:id="selectedListView" VBox.vgrow="ALWAYS" styleClass="track-list"/>
+        </VBox>
+
+    </HBox>
+
+    <Separator/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT" styleClass="dialog-buttons">
+        <padding><Insets top="12" right="20" bottom="14" left="20"/></padding>
+        <Button text="Скасувати" onAction="#onCancel" styleClass="btn-cancel" cancelButton="true"/>
+        <Button text="💾 Зберегти диск" onAction="#onSave" styleClass="btn-save" defaultButton="true"/>
+    </HBox>
+
+</VBox>

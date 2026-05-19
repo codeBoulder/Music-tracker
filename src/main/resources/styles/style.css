@@ -1,0 +1,288 @@
+/* ================================================================
+   style.css — Music Collection Manager
+   Підключається до всіх сцен через MainApp.start()
+   ================================================================ */
+
+/* ---------- Загальний фон ---------- */
+.root-pane {
+    -fx-background-color: #f4f6f9;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* ---------- Шапка ---------- */
+.header {
+    -fx-background-color: #1e2a40;
+    -fx-padding: 12 18 12 18;
+}
+
+.header-title {
+    -fx-text-fill: #e8edf5;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Таби ---------- */
+.main-tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: #dde3ed;
+    -fx-padding: 6 16 6 16;
+}
+
+.main-tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #ffffff;
+}
+
+.main-tab-pane > .tab-header-area > .headers-region > .tab .tab-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #444;
+}
+
+.main-tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label {
+    -fx-text-fill: #1e2a40;
+    -fx-font-weight: bold;
+}
+
+.tab-content {
+    -fx-background-color: #ffffff;
+    -fx-padding: 0;
+}
+
+/* ---------- Тулбар ---------- */
+.toolbar {
+    -fx-background-color: #f0f3f8;
+    -fx-padding: 8 10 8 10;
+    -fx-border-color: #d8dee8;
+    -fx-border-width: 0 0 1 0;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* ---------- Кнопки ---------- */
+.btn-primary {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+.btn-primary:hover { -fx-background-color: #1d4ed8; }
+
+.btn-secondary {
+    -fx-background-color: #64748b;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+.btn-secondary:hover { -fx-background-color: #475569; }
+
+.btn-danger {
+    -fx-background-color: #dc2626;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+.btn-danger:hover { -fx-background-color: #b91c1c; }
+
+.btn-search {
+    -fx-background-color: #0891b2;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 6 12 6 12;
+    -fx-cursor: hand;
+}
+.btn-search:hover { -fx-background-color: #0e7490; }
+
+.btn-reset {
+    -fx-background-color: #94a3b8;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 6 10 6 10;
+    -fx-cursor: hand;
+}
+.btn-reset:hover { -fx-background-color: #64748b; }
+
+.btn-sort {
+    -fx-background-color: #7c3aed;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 6 14 6 14;
+    -fx-cursor: hand;
+}
+.btn-sort:hover { -fx-background-color: #6d28d9; }
+
+/* ---------- Поля пошуку ---------- */
+.search-label, .search-dash {
+    -fx-text-fill: #444;
+}
+
+.search-field {
+    -fx-border-color: #c7d0e0;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 4 6 4 6;
+}
+
+/* ---------- Таблиці ---------- */
+.data-table {
+    -fx-border-color: #d8dee8;
+    -fx-border-width: 1;
+    -fx-background-color: white;
+}
+
+.data-table .column-header-background {
+    -fx-background-color: #e8edf5;
+}
+
+.data-table .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e2a40;
+    -fx-font-size: 12px;
+}
+
+.data-table .table-row-cell:odd {
+    -fx-background-color: #f8fafc;
+}
+
+.data-table .table-row-cell:selected {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1e2a40;
+}
+
+/* ---------- Блок дисків ---------- */
+.disc-split {
+    -fx-padding: 0;
+}
+
+.disc-left-panel, .disc-right-panel {
+    -fx-background-color: #ffffff;
+    -fx-padding: 6;
+}
+
+.section-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e2a40;
+    -fx-font-size: 13px;
+}
+
+/* ---------- Рядок тривалості ---------- */
+.duration-bar {
+    -fx-background-color: #f0f3f8;
+    -fx-border-color: #d8dee8;
+    -fx-border-width: 1 0 0 0;
+}
+
+.duration-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e2a40;
+    -fx-font-size: 13px;
+}
+
+/* ---------- Статус-бар ---------- */
+.status-bar {
+    -fx-background-color: #1e2a40;
+    -fx-min-height: 26px;
+}
+
+.status-label {
+    -fx-text-fill: #94a3b8;
+    -fx-font-size: 11px;
+}
+
+/* ================================================================
+   ДІАЛОГОВІ ВІКНА (TrackDialog, DiscDialog)
+   ================================================================ */
+
+.dialog-root {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 13px;
+}
+
+.dialog-header {
+    -fx-background-color: #1e2a40;
+    -fx-text-fill: #e8edf5;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20 12 20;
+    -fx-max-width: Infinity;
+}
+
+.dialog-form {
+    -fx-background-color: #ffffff;
+}
+
+.form-label {
+    -fx-text-fill: #374151;
+    -fx-font-weight: bold;
+    -fx-min-width: 130;
+}
+
+.hint-label {
+    -fx-text-fill: #9ca3af;
+    -fx-font-size: 11px;
+    -fx-padding: 4 0 0 0;
+}
+
+.dialog-buttons {
+    -fx-background-color: #f8fafc;
+}
+
+.btn-save {
+    -fx-background-color: #16a34a;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-padding: 7 20 7 20;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+.btn-save:hover { -fx-background-color: #15803d; }
+
+.btn-cancel {
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: #374151;
+    -fx-background-radius: 5;
+    -fx-padding: 7 16 7 16;
+    -fx-cursor: hand;
+}
+.btn-cancel:hover { -fx-background-color: #d1d5db; }
+
+/* ---------- Діалог диска: ListView та кнопки ---------- */
+.track-list {
+    -fx-border-color: #d8dee8;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.track-list .list-cell:selected {
+    -fx-background-color: #dbeafe;
+    -fx-text-fill: #1e2a40;
+}
+
+.track-list .list-cell:odd {
+    -fx-background-color: #f8fafc;
+}
+
+.panel-title {
+    -fx-font-weight: bold;
+    -fx-text-fill: #374151;
+    -fx-font-size: 12px;
+}
+
+.btn-move {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+    -fx-font-size: 11px;
+}
+.btn-move:hover { -fx-background-color: #1d4ed8; }
+
+.btn-order {
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: #374151;
+    -fx-background-radius: 4;
+    -fx-cursor: hand;
+    -fx-padding: 3 6 3 6;
+}
+.btn-order:hover { -fx-background-color: #d1d5db; }
