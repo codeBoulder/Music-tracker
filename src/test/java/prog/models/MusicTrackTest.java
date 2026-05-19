@@ -5,16 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Юніт-тести для ієрархії моделей MusicTrack.
- * Перевіряємо конструктори, гетери, сетери, getGenre(), getFormattedDuration(), toString().
- */
+
 @DisplayName("MusicTrack hierarchy tests")
 class MusicTrackTest {
 
-    // =========================================================
-    //  RockTrack
-    // =========================================================
 
     @Test
     @DisplayName("RockTrack: getGenre() повертає 'Rock'")
@@ -53,9 +47,6 @@ class MusicTrackTest {
         assertTrue(str.contains("Grunge"));
     }
 
-    // =========================================================
-    //  PopTrack
-    // =========================================================
 
     @Test
     @DisplayName("PopTrack: getGenre() повертає 'Pop'")
@@ -100,10 +91,6 @@ class MusicTrackTest {
         assertTrue(track.toString().contains("No"));
     }
 
-    // =========================================================
-    //  JazzTrack
-    // =========================================================
-
     @Test
     @DisplayName("JazzTrack: getGenre() повертає 'Jazz'")
     void jazzTrack_getGenre() {
@@ -133,10 +120,6 @@ class MusicTrackTest {
         assertTrue(track.toString().contains("Smooth"));
         assertTrue(track.toString().contains("Jazz"));
     }
-
-    // =========================================================
-    //  ClassicalTrack
-    // =========================================================
 
     @Test
     @DisplayName("ClassicalTrack: getGenre() повертає 'Classical'")
@@ -168,10 +151,6 @@ class MusicTrackTest {
         assertTrue(track.toString().contains("Classical"));
     }
 
-    // =========================================================
-    //  MusicTrack — getFormattedDuration (базовий клас)
-    // =========================================================
-
     @Test
     @DisplayName("getFormattedDuration: 0 секунд → '0:00'")
     void formattedDuration_zero() {
@@ -199,10 +178,6 @@ class MusicTrackTest {
         RockTrack t = new RockTrack(1, "T", "A", 213, "");
         assertEquals("3:33", t.getFormattedDuration());
     }
-
-    // =========================================================
-    //  MusicTrack — сетери базового класу
-    // =========================================================
 
     @Test
     @DisplayName("MusicTrack: сетер id працює")

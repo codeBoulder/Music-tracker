@@ -8,9 +8,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Юніт-тести для класу Disc.
- */
 @DisplayName("Disc model tests")
 class DiscTest {
 
@@ -27,7 +24,6 @@ class DiscTest {
         jazz = new JazzTrack(3, "So What",         "Miles Davis",  565, "Modal");
     }
 
-    // --- Конструктор і базові гетери ---
 
     @Test
     @DisplayName("Конструктор встановлює id та title")
@@ -42,7 +38,6 @@ class DiscTest {
         assertTrue(disc.getTracks().isEmpty());
     }
 
-    // --- addTrack ---
 
     @Test
     @DisplayName("addTrack додає трек до диска")
@@ -71,7 +66,6 @@ class DiscTest {
         assertEquals(pop,  tracks.get(1));
     }
 
-    // --- removeTrack ---
 
     @Test
     @DisplayName("removeTrack видаляє трек за валідним індексом")
@@ -105,8 +99,6 @@ class DiscTest {
         assertDoesNotThrow(() -> disc.removeTrack(0));
     }
 
-    // --- getTracks повертає копію ---
-
     @Test
     @DisplayName("getTracks повертає незалежну копію — зміна не впливає на диск")
     void getTracks_returnsDefensiveCopy() {
@@ -116,8 +108,6 @@ class DiscTest {
         // диск не змінився
         assertEquals(1, disc.getTracks().size());
     }
-
-    // --- setTracks ---
 
     @Test
     @DisplayName("setTracks замінює весь список треків")
@@ -140,7 +130,6 @@ class DiscTest {
         assertEquals(pop,  tracks.get(2));
     }
 
-    // --- Сетери базових полів ---
 
     @Test
     @DisplayName("setId та getId працюють")
@@ -156,7 +145,6 @@ class DiscTest {
         assertEquals("Best Hits", disc.getTitle());
     }
 
-    // --- toString ---
 
     @Test
     @DisplayName("toString містить id, title та кількість треків")

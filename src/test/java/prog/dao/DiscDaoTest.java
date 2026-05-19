@@ -11,10 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Інтеграційні тести для DiscDao.
- * Використовує SQLite in-memory базу з повною схемою (tracks + discs + disc_tracks).
- */
+
 @DisplayName("DiscDao integration tests")
 class DiscDaoTest {
 
@@ -25,7 +22,6 @@ class DiscDaoTest {
     @BeforeAll
     static void setUpDatabase() throws SQLException {
         connection = DriverManager.getConnection("jdbc:sqlite::memory:");
-        // Вмикаємо підтримку foreign keys для SQLite
         try (Statement stmt = connection.createStatement()) {
             stmt.execute("PRAGMA foreign_keys = ON");
         }
@@ -79,16 +75,11 @@ class DiscDaoTest {
         connection.close();
     }
 
-    // --- Допоміжний метод: зберегти трек та повернути збережений об'єкт ---
     private RockTrack saveRockTrack(String title, String artist, int duration) throws SQLException {
         RockTrack track = new RockTrack(0, title, artist, duration, "");
         trackDao.save(track);
         return track;
     }
-
-    // =========================================================
-    //  save
-    // =========================================================
 
     @Test
     @DisplayName("save: диск отримує id після збереження")
@@ -142,10 +133,6 @@ class DiscDaoTest {
         assertEquals("Third",  tracks.get(2).getTitle());
     }
 
-    // =========================================================
-    //  update
-    // =========================================================
-
     @Test
     @DisplayName("update: назва диска змінюється")
     void update_changesTitle() throws SQLException {
@@ -198,10 +185,6 @@ class DiscDaoTest {
         assertEquals("T3", loaded.getTracks().get(0).getTitle());
     }
 
-    // =========================================================
-    //  delete
-    // =========================================================
-
     @Test
     @DisplayName("delete: диск більше не знаходиться після видалення")
     void delete_discNotFoundAfterDelete() throws SQLException {
@@ -225,7 +208,6 @@ class DiscDaoTest {
 
         discDao.delete(discId);
 
-        // Перевіряємо disc_tracks напряму
         try (var ps = connection.prepareStatement(
                 "SELECT COUNT(*) FROM disc_tracks WHERE disc_id=?")) {
             ps.setInt(1, discId);
@@ -239,10 +221,6 @@ class DiscDaoTest {
     void delete_nonExistentId_noException() {
         assertDoesNotThrow(() -> discDao.delete(9999));
     }
-
-    // =========================================================
-    //  findAll
-    // =========================================================
 
     @Test
     @DisplayName("findAll: порожня таблиця → порожній список")
@@ -287,10 +265,6 @@ class DiscDaoTest {
         assertEquals(1, loaded2.getTracks().size());
         assertEquals("T2", loaded2.getTracks().get(0).getTitle());
     }
-
-    // =========================================================
-    //  findById
-    // =========================================================
 
     @Test
     @DisplayName("findById: неіснуючий id → null")

@@ -48,10 +48,8 @@ class EmailNotificationServiceTest {
             mockedTransport.when(() -> Transport.send(any(Message.class)))
                     .thenThrow(new MessagingException("Authentication failed / Connection timed out"));
 
-            // Коли — сервіс не повинен "упустити" всю програму, а має просто залогувати помилку в catch
             assertDoesNotThrow(() -> service.sendException("Запис диска", testException));
 
-            // Перевіряємо, що спроба відправки відбулася
             mockedTransport.verify(
                     () -> Transport.send(any(Message.class)),
                     timeout(2000).times(1)

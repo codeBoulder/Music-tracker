@@ -17,10 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/**
- * Юніт-тести для TrackService.
- * DAO замінено Mockito-заглушкою — перевіряємо тільки бізнес-логіку.
- */
+
 @ExtendWith(MockitoExtension.class)
 @DisplayName("TrackService unit tests")
 class TrackServiceTest {
@@ -42,10 +39,6 @@ class TrackServiceTest {
         validJazz = new JazzTrack(3, "So What",        "Miles Davis", 300, "Modal");
     }
 
-    // =========================================================
-    //  addTrack — успішний сценарій
-    // =========================================================
-
     @Test
     @DisplayName("addTrack: валідний трек — викликає dao.save")
     void addTrack_valid_callsSave() throws Exception {
@@ -59,10 +52,6 @@ class TrackServiceTest {
         trackService.addTrack(validPop);
         verify(trackDao).save(validPop);
     }
-
-    // =========================================================
-    //  addTrack — валідація
-    // =========================================================
 
     @Test
     @DisplayName("addTrack: null трек → ServiceException")
@@ -123,9 +112,6 @@ class TrackServiceTest {
         assertTrue(ex.getMessage().contains("DB error"));
     }
 
-    // =========================================================
-    //  updateTrack
-    // =========================================================
 
     @Test
     @DisplayName("updateTrack: валідний трек з id > 0 — викликає dao.update")
@@ -164,10 +150,6 @@ class TrackServiceTest {
         assertTrue(ex.getMessage().contains("update fail"));
     }
 
-    // =========================================================
-    //  deleteTrack
-    // =========================================================
-
     @Test
     @DisplayName("deleteTrack: валідний id — викликає dao.delete")
     void deleteTrack_valid_callsDelete() throws Exception {
@@ -197,10 +179,6 @@ class TrackServiceTest {
         assertTrue(ex.getMessage().contains("delete fail"));
     }
 
-    // =========================================================
-    //  getAllTracks
-    // =========================================================
-
     @Test
     @DisplayName("getAllTracks: повертає список з DAO")
     void getAllTracks_returnsDaoResult() throws Exception {
@@ -226,10 +204,6 @@ class TrackServiceTest {
         when(trackDao.findAll()).thenThrow(new SQLException("read fail"));
         assertThrows(ServiceException.class, () -> trackService.getAllTracks());
     }
-
-    // =========================================================
-    //  findByDurationRange
-    // =========================================================
 
     @Test
     @DisplayName("findByDurationRange: повертає треки в діапазоні [200, 260]")

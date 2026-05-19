@@ -11,19 +11,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Інтеграційні тести для TrackDao.
- *
- * Використовуємо SQLite in-memory базу (:memory:) — вона ізольована,
- * не потребує файлів і очищується після кожного тесту.
- */
 @DisplayName("TrackDao integration tests")
 class TrackDaoTest {
 
     private static Connection connection;
     private TrackDao trackDao;
 
-    // ---- Схема, яка повторює initSchema з DatabaseManager ----
     private static final String CREATE_TRACKS = """
         CREATE TABLE IF NOT EXISTS tracks (
             id           INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,10 +54,6 @@ class TrackDaoTest {
     static void closeDatabase() throws SQLException {
         connection.close();
     }
-
-    // =========================================================
-    //  save
-    // =========================================================
 
     @Test
     @DisplayName("save RockTrack: встановлює id після збереження")
@@ -129,10 +118,6 @@ class TrackDaoTest {
         assertEquals("Grunge", ((RockTrack) found).getSubgenre());
     }
 
-    // =========================================================
-    //  update
-    // =========================================================
-
     @Test
     @DisplayName("update: змінює назву та тривалість трека")
     void update_changesTitleAndDuration() throws SQLException {
@@ -154,7 +139,6 @@ class TrackDaoTest {
         RockTrack rock = new RockTrack(0, "My Song", "Artist", 200, "Hard");
         trackDao.save(rock);
 
-        // Зберігаємо id і замінюємо трек джазом з тим самим id
         JazzTrack jazz = new JazzTrack(rock.getId(), "My Song", "Artist", 200, "Smooth");
         trackDao.update(jazz);
 
@@ -162,10 +146,6 @@ class TrackDaoTest {
         assertInstanceOf(JazzTrack.class, found);
         assertEquals("Jazz", found.getGenre());
     }
-
-    // =========================================================
-    //  delete
-    // =========================================================
 
     @Test
     @DisplayName("delete: трек більше не знаходиться через findById")
@@ -184,10 +164,6 @@ class TrackDaoTest {
     void delete_nonExistentId_noException() {
         assertDoesNotThrow(() -> trackDao.delete(9999));
     }
-
-    // =========================================================
-    //  findAll
-    // =========================================================
 
     @Test
     @DisplayName("findAll: порожня таблиця — порожній список")
@@ -238,10 +214,6 @@ class TrackDaoTest {
         assertEquals(1, jazzCount);
         assertEquals(1, classCount);
     }
-
-    // =========================================================
-    //  findById
-    // =========================================================
 
     @Test
     @DisplayName("findById: неіснуючий id → null")

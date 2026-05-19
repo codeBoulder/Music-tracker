@@ -18,9 +18,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-/**
- * Юніт-тести для DiscService.
- */
 @ExtendWith(MockitoExtension.class)
 @DisplayName("DiscService unit tests")
 class DiscServiceTest {
@@ -45,10 +42,6 @@ class DiscServiceTest {
         jazz      = new JazzTrack(3,     "So What",          "Miles Davis", 300, "Modal");
         classical = new ClassicalTrack(4,"Moonlight Sonata", "Beethoven",   900, "Romantic");
     }
-
-    // =========================================================
-    //  saveDisc
-    // =========================================================
 
     @Test
     @DisplayName("saveDisc: валідний диск — викликає dao.save")
@@ -88,10 +81,6 @@ class DiscServiceTest {
         assertTrue(ex.getMessage().contains("save failed"));
     }
 
-    // =========================================================
-    //  updateDisc
-    // =========================================================
-
     @Test
     @DisplayName("updateDisc: диск з id > 0 — викликає dao.update")
     void updateDisc_valid_callsUpdate() throws Exception {
@@ -129,10 +118,6 @@ class DiscServiceTest {
         assertTrue(ex.getMessage().contains("upd fail"));
     }
 
-    // =========================================================
-    //  deleteDisc
-    // =========================================================
-
     @Test
     @DisplayName("deleteDisc: валідний id — викликає dao.delete")
     void deleteDisc_valid_callsDelete() throws Exception {
@@ -148,10 +133,6 @@ class DiscServiceTest {
                 () -> discService.deleteDisc(1));
         assertTrue(ex.getMessage().contains("del fail"));
     }
-
-    // =========================================================
-    //  getAllDiscs
-    // =========================================================
 
     @Test
     @DisplayName("getAllDiscs: повертає список з DAO")
@@ -170,10 +151,6 @@ class DiscServiceTest {
         when(discDao.findAll()).thenThrow(new SQLException("read fail"));
         assertThrows(ServiceException.class, () -> discService.getAllDiscs());
     }
-
-    // =========================================================
-    //  calculateTotalDuration
-    // =========================================================
 
     @Test
     @DisplayName("calculateTotalDuration: сума тривалостей усіх треків")
@@ -197,10 +174,6 @@ class DiscServiceTest {
         disc.addTrack(classical); // 900 сек
         assertEquals(900, discService.calculateTotalDuration(disc));
     }
-
-    // =========================================================
-    //  formatTotalDuration
-    // =========================================================
 
     @Test
     @DisplayName("formatTotalDuration: менше години — формат 'Xm Ys'")
@@ -242,14 +215,9 @@ class DiscServiceTest {
         assertEquals("1m 30s", discService.formatTotalDuration(disc));
     }
 
-    // =========================================================
-    //  sortTracksByGenre
-    // =========================================================
-
     @Test
     @DisplayName("sortTracksByGenre: сортує за назвою жанру алфавітно")
     void sortTracksByGenre_alphabeticalOrder() {
-        // Classical < Jazz < Pop < Rock
         disc.addTrack(rock);
         disc.addTrack(pop);
         disc.addTrack(jazz);
@@ -272,7 +240,6 @@ class DiscServiceTest {
 
         discService.sortTracksByGenre(disc);
 
-        // оригінальний диск — без змін
         assertEquals(originalOrder.get(0).getGenre(), disc.getTracks().get(0).getGenre());
         assertEquals(originalOrder.get(1).getGenre(), disc.getTracks().get(1).getGenre());
     }
@@ -313,7 +280,6 @@ class DiscServiceTest {
         disc.addTrack(r1);
 
         List<MusicTrack> sorted = discService.sortTracksByGenre(disc);
-        // обидва Rock, порядок між ними не змінюється (вставки стабільна)
         assertEquals(2, sorted.size());
         assertEquals("Rock", sorted.get(0).getGenre());
         assertEquals("Rock", sorted.get(1).getGenre());

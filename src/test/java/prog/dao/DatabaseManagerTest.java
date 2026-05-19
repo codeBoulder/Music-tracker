@@ -16,11 +16,9 @@ class DatabaseManagerTest {
     @Test
     @DisplayName("getInstance: повертає той самий екземпляр (перевірка Singleton)")
     void testSingletonInstance() {
-        // Коли
         DatabaseManager instance1 = DatabaseManager.getInstance();
         DatabaseManager instance2 = DatabaseManager.getInstance();
 
-        // Тоді
         assertNotNull(instance1, "Екземпляр не повинен бути null");
         assertSame(instance1, instance2, "getInstance має повертати один і той самий об'єкт у пам'яті");
     }
@@ -52,19 +50,12 @@ class DatabaseManagerTest {
         assertTrue(tableExists(connection, "disc_tracks"), "Таблиця 'disc_tracks' має бути створена");
     }
 
-    // =========================================================
-    //  Допоміжні методи для тестів
-    // =========================================================
 
-    /**
-     * Перевіряє, чи існує таблиця з вказаною назвою у базі даних.
-     */
     private boolean tableExists(Connection connection, String tableName) throws SQLException {
         DatabaseMetaData metaData = connection.getMetaData();
-        // У SQLite назви таблиць зазвичай зберігаються в нижньому регістрі,
-        // але getTables шукає без урахування регістру, якщо передати правильні параметри
+
         try (ResultSet resultSet = metaData.getTables(null, null, tableName, new String[]{"TABLE"})) {
-            return resultSet.next(); // Якщо є хоча б один запис, значить таблиця існує
+            return resultSet.next();
         }
     }
 }
